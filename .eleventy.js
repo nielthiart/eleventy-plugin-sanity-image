@@ -20,7 +20,7 @@ module.exports = function (eleventyConfig, options = {}) {
             .auto('format')
     })
 
-    eleventyConfig.addShortcode('responsiveImage', (image, srcs="320,640,900", sizes="100vw", classList="", quality) => {
+    eleventyConfig.addShortcode('responsiveImage', (image, srcs="320,640,900", sizes="100vw", classList="", alt, quality) => {
         const sizeArray = srcs.split(',');
         const firstSize = sizeArray[0];
         const lastSize = sizeArray[sizeArray.length - 1];
@@ -41,7 +41,7 @@ module.exports = function (eleventyConfig, options = {}) {
                 srcset="${srcSetContent}"
                 sizes="${sizes}"
                 width="${lastSize.trim()}"
-                alt="${image.alt || ''}"
+                alt="${alt || image.alt || ''}"
             >`
         )
     })
