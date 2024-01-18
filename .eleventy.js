@@ -48,7 +48,8 @@ module.exports = function (eleventyConfig, options = {}) {
             .auto('format')
 
           if (height_factor) {
-            url = url.height(Math.round(size * height_factor))
+            const height = Math.round(size * height_factor)
+            url = url.height(height)
           }
 
           return `${url.url()} ${size}w`
@@ -62,6 +63,7 @@ module.exports = function (eleventyConfig, options = {}) {
                 sizes="${sizes}"
                 width="${lastSize.trim()}"
                 alt="${alt || image.alt || ''}"
+                ${height_factor ? "height='" + height + "'" : ''}
             >`
     }
   )
