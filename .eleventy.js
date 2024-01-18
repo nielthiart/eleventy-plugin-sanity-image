@@ -1,5 +1,6 @@
 const imageUrl = require('@sanity/image-url')
 
+const DEFAULT_QUALITY = 85
 
 module.exports = function (eleventyConfig, options = {}) {
     function urlFor(source) {
@@ -8,12 +9,14 @@ module.exports = function (eleventyConfig, options = {}) {
     eleventyConfig.addShortcode('imageUrlFor', (image, width = "400") => {
         return urlFor(image)
             .width(width)
+            .quality(options.quality || DEFAULT_QUALITY)
             .auto('format')
     })
     eleventyConfig.addShortcode('croppedUrlFor', (image, width, height) => {
         return urlFor(image)
             .width(width)
             .height(height)
+            .quality(options.quality || DEFAULT_QUALITY)
             .auto('format')
     })
 
@@ -24,6 +27,7 @@ module.exports = function (eleventyConfig, options = {}) {
         const srcSetContent = sizeArray.map((size) => {
             const url = urlFor(image)
                 .width(size)
+                .quality(options.quality || DEFAULT_QUALITY)
                 .auto('format')
                 .url()
 
