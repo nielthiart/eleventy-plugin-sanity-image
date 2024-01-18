@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "@sanity/image-url": "^0.140.19"
+    "@11ty/eleventy": "^2.0.1",
+    "@sanity/image-url": "^1.0.2"
   }
 }
