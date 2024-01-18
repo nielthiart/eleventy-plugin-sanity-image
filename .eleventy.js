@@ -6,28 +6,28 @@ module.exports = function (eleventyConfig, options = {}) {
     function urlFor(source) {
         return imageUrl(options.client).image(source)
     }
-    eleventyConfig.addShortcode('imageUrlFor', (image, width = "400") => {
+    eleventyConfig.addShortcode('imageUrlFor', (image, width = "400", quality) => {
         return urlFor(image)
             .width(width)
-            .quality(options.quality || DEFAULT_QUALITY)
+            .quality(quality || options.quality || DEFAULT_QUALITY)
             .auto('format')
     })
-    eleventyConfig.addShortcode('croppedUrlFor', (image, width, height) => {
+    eleventyConfig.addShortcode('croppedUrlFor', (image, width, height, quality) => {
         return urlFor(image)
             .width(width)
             .height(height)
-            .quality(options.quality || DEFAULT_QUALITY)
+            .quality(quality || options.quality || DEFAULT_QUALITY)
             .auto('format')
     })
 
-    eleventyConfig.addShortcode('responsiveImage', (image, srcs="320,640,900", sizes="100vw", classList="") => {
+    eleventyConfig.addShortcode('responsiveImage', (image, srcs="320,640,900", sizes="100vw", classList="", quality) => {
         const sizeArray = srcs.split(',');
         const firstSize = sizeArray[0];
         const lastSize = sizeArray[sizeArray.length - 1];
         const srcSetContent = sizeArray.map((size) => {
             const url = urlFor(image)
                 .width(size)
-                .quality(options.quality || DEFAULT_QUALITY)
+                .quality(quality || options.quality || DEFAULT_QUALITY)
                 .auto('format')
                 .url()
 
