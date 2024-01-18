@@ -40,7 +40,9 @@ module.exports = function (eleventyConfig, options = {}) {
                 ${classList ? "class='" + classList + "'" : ""}
                 srcset="${srcSetContent}"
                 sizes="${sizes}"
-                width="${lastSize.trim()}">`
+                width="${lastSize.trim()}"
+                alt="${image.alt || ''}"
+            >`
         )
     })
 
